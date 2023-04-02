@@ -17,7 +17,11 @@ def mostrar_personas(request):
 
 def mostrar_mascotas(request):
     mascota = Mascota.objects.all()
-    return render(request, "herencia_HTML/mascota.html", {"Mascotas": mascota, "Formulario": MascotaForm()})
+    context = {
+        "Mascotas": mascota, 
+        "Formulario": MascotaForm()
+    }
+    return render(request, "herencia_HTML/mascota.html", context)
 
 def mostrar_vehiculo(request):
     vehiculo = Vehiculo.objects.all()
@@ -54,7 +58,7 @@ class BuscarPersonas(ListView):
         return Persona.objects.none()
 
 def cargar_vehiculo(request):
-    f = BuscarVehiculosForm(request.POST)
+    f = VehiculoForm(request.POST)
 
     context = {
         "Formulario": f
@@ -84,7 +88,7 @@ class BuscarVehiculo(ListView):
         return Vehiculo.objects.none()
     
 def cargar_mascota(request):
-    f = BuscarMascotasForm(request.POST)
+    f = MascotaForm(request.POST)
 
     context = {
         "Formulario": f
